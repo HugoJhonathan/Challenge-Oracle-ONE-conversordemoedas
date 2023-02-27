@@ -9,39 +9,39 @@ public class TemperatureTest {
 
     @Test
     public void testConversaoCelsius() {
-        test(400, Celsius).isEquals(400.0, Celsius);
-        test(400, Celsius).isEquals(752.0, Fahrenheit);
-        test(400, Celsius).isEquals(673.15, Kelvin);
-        test(400, Celsius).isEquals(132, Newton);
-        test(400, Celsius).isEquals(320, Reaumur);
-        test(400, Celsius).isEquals(1211.67, Rankine);
+        test(400, CELSIUS).isEquals(400.0, CELSIUS);
+        test(400, CELSIUS).isEquals(752.0, FAHRENHEIT);
+        test(400, CELSIUS).isEquals(673.15, KELVIN);
+        test(400, CELSIUS).isEquals(132, NEWTON);
+        test(400, CELSIUS).isEquals(320, REAUMUR);
+        test(400, CELSIUS).isEquals(1211.67, RANKINE);
     }
 
     @Test
     public void testConversaoKelvin() {
-        test(400, Kelvin).isEquals(126.85, Celsius);
-        test(400, Kelvin).isEquals(260.33, Fahrenheit);
-        test(400, Kelvin).isEquals(400.0, Kelvin);
-        test(400, Kelvin).isEquals(41.8605, Newton);
-        test(400, Kelvin).isEquals(101.48, Reaumur);
-        test(400, Kelvin).isEquals(720, Rankine);
+        test(400, KELVIN).isEquals(126.85, CELSIUS);
+        test(400, KELVIN).isEquals(260.33, FAHRENHEIT);
+        test(400, KELVIN).isEquals(400.0, KELVIN);
+        test(400, KELVIN).isEquals(41.8605, NEWTON);
+        test(400, KELVIN).isEquals(101.48, REAUMUR);
+        test(400, KELVIN).isEquals(720, RANKINE);
     }
 
     @Test
     public void testConversaoFahrenheit() {
-        test(400, Celsius).isEquals(-450, Delisle);
-        test(400, Fahrenheit).isEquals(-156.6666667, Delisle);
-        test(400, Kelvin).isEquals(-40.275, Delisle);
-        test(400, Newton).isEquals(-1668.1818182, Delisle);
-        test(400, Reaumur).isEquals(-600.0, Delisle);
-        test(400, Rankine).isEquals(226.3916667, Delisle);
-        test(400, Delisle).isEquals(400.00, Delisle);
-        test(400, Delisle).isEquals(-166.6666667, Celsius);
-        test(400, Delisle).isEquals(-268, Fahrenheit);
-        test(400, Delisle).isEquals(106.4833333, Kelvin);
-        test(400, Delisle).isEquals(-55, Newton);
-        test(400, Delisle).isEquals(-133.3333333, Reaumur);
-        test(400, Delisle).isEquals(191.67, Rankine);
-        test(400, Delisle).isEquals(400, Delisle);
+        test(400, CELSIUS).isEquals(-450, DELISLE);
+        test(400, FAHRENHEIT).isEquals(-156.6666667, DELISLE);
+        test(400, KELVIN).isEquals(-40.275, DELISLE);
+        test(400, NEWTON).isEquals(-1668.1818182, DELISLE);
+        test(400, REAUMUR).isEquals(-600.0, DELISLE);
+        test(400, RANKINE).isEquals(226.3916667, DELISLE);
+        test(400, DELISLE).isEquals(400.00, DELISLE);
+        test(400, DELISLE).isEquals(-166.6666667, CELSIUS);
+        test(400, DELISLE).isEquals(-268, FAHRENHEIT);
+        test(400, DELISLE).isEquals(106.4833333, KELVIN);
+        test(400, DELISLE).isEquals(-55, NEWTON);
+        test(400, DELISLE).isEquals(-133.3333333, REAUMUR);
+        test(400, DELISLE).isEquals(191.67, RANKINE);
+        test(400, DELISLE).isEquals(400, DELISLE);
     }
 }

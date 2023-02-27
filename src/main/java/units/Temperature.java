@@ -1,19 +1,21 @@
 package units;
 
 public enum Temperature implements Unit {
-    Celsius("°C", 1.0, 0.0),
-    Fahrenheit("°F", 1.8, 32.0),
-    Kelvin("K", 1.0, 273.15),
-    Newton("°N", 0.33, 0.0),
-    Reaumur("°Re", 0.8, 0.0),
-    Rankine("°Ra", 1.8, 491.67),
-    Delisle("°De", 2.0 / 3.0, -100.0 / 3.0);
+    CELSIUS("Celsius", "°C", 1.0, 0.0),
+    FAHRENHEIT("Fahrenheit", "°F", 1.8, 32.0),
+    KELVIN("Kelvin", "K", 1.0, 273.15),
+    NEWTON("Newton", "°N", 0.33, 0.0),
+    REAUMUR("Reaumur", "°Re", 0.8, 0.0),
+    RANKINE("Rankine", "°Ra", 1.8, 491.67),
+    DELISLE("Delisle", "°De", 2.0 / 3.0, -100.0 / 3.0);
 
-    private String symbol;
-    private double factor1;
-    private double factor2;
+    private final String name;
+    private final String symbol;
+    private final double factor1;
+    private final double factor2;
 
-    Temperature(String symbol, double factor1, double factor2) {
+    Temperature(String name, String symbol, double factor1, double factor2) {
+        this.name = name;
         this.symbol = symbol;
         this.factor1 = factor1;
         this.factor2 = factor2;
@@ -22,6 +24,11 @@ public enum Temperature implements Unit {
     @Override
     public double getFactor() {
         return factor1;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     public double getFactor2() {
@@ -43,14 +50,14 @@ public enum Temperature implements Unit {
         double targetFactor1 = targetUnit.getFactor();
         double targetFactor2 = ((Temperature) targetUnit).getFactor2();
 
-        if (source == Delisle || targetUnit == Delisle) {
-            if (targetUnit == Celsius) {
+        if (source == DELISLE || targetUnit == DELISLE) {
+            if (targetUnit == CELSIUS) {
                 return 100 - (amount * 0.66666666666);
-            } else if (source == Celsius) {
+            } else if (source == CELSIUS) {
                 return (100 - amount) * 1.5;
             } else {
-                double convertedToCelsius = source.convert(amount, Celsius);
-                return Celsius.convert(convertedToCelsius, targetUnit);
+                double convertedToCelsius = source.convert(amount, CELSIUS);
+                return CELSIUS.convert(convertedToCelsius, targetUnit);
             }
         }
 

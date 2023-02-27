@@ -1,18 +1,20 @@
 package units;
 
 public enum Mass implements Unit {
-    Kilograma("Kg", 1000.0),
-    Hectograma("hg", 100.0),
-    Decagrama("dag", 10.0),
-    Grama("g", 1.0),
-    Decograma("dg", 0.1),
-    Centigrama("cg", 0.01),
-    Miligrama("mg", 0.001);
+    KILOGRAMA("Quilograma", "Kg", 1000.0),
+    HECTOGRAMA("Hectograma", "hg", 100.0),
+    DECAGRAMA("Decagrama", "dag", 10.0),
+    GRAMA("Grama", "g", 1.0),
+    DECOGRAMA("Decograma", "dg", 0.1),
+    CENTIGRAMA("Centigrama", "cg", 0.01),
+    MILIGRAMA("Miligrama", "mg", 0.001);
 
-    private String symbol;
-    private double factor;
+    private final String symbol;
+    private final double factor;
+    private final String name;
 
-    Mass(String symbol, double factor) {
+    Mass(String name, String symbol, double factor) {
+        this.name = name;
         this.symbol = symbol;
         this.factor = factor;
     }
@@ -20,6 +22,11 @@ public enum Mass implements Unit {
     @Override
     public double getFactor() {
         return factor;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 
     @Override

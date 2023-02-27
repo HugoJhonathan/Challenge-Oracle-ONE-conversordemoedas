@@ -6,6 +6,8 @@ public interface Unit {
 
     double getFactor();
 
+    String getName();
+
     default String getFormattedValue(double value) {
         return value + " " + getSymbol();
     }

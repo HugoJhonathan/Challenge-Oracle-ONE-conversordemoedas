@@ -7,23 +7,25 @@ import java.util.List;
 import java.util.Objects;
 
 public enum Money implements Unit {
-    Real("BRL", 0.1919),
-    Dolar("USD", 1.00),
-    Euro("EUR", 1.06),
-    Libra("GBP", 1.21),
-    Peso_Argentino("ARS", 0.005125),
-    Peso_Chileno("CLP", 0.00126);
+    REAL("Real", "BRL", 0.1919),
+    DOLAR("Dólar", "USD", 1.00),
+    EURO("Euro", "EUR", 1.06),
+    LIBRA("Libra", "GBP", 1.21),
+    PESO_ARGENTINO("Peso Argentino", "ARS", 0.005125),
+    PESO_CHILENO("Peso Chileno", "CLP", 0.00126);
 
-    private String symbol;
+    private final String name;
+    private final String symbol;
     private double dollarEquivalent;
 
-    Money(String symbol, double dollarEquivalent) {
+    Money(String name, String symbol, double dollarEquivalent) {
         try {
             Currency.getInstance(symbol);
         } catch (IllegalArgumentException e) {
             System.out.println(Currency.getAvailableCurrencies());
             throw new RuntimeException("Currency symbol " + symbol + " does not exist!");
         }
+        this.name = name;
         this.symbol = symbol;
         this.dollarEquivalent = dollarEquivalent;
     }
@@ -50,6 +52,11 @@ public enum Money implements Unit {
     @Override
     public double getFactor() {
         return dollarEquivalent;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     public double getDollarEquivalent() {
