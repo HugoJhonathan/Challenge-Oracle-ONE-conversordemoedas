@@ -26,7 +26,7 @@ public enum Mass implements Unit {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
