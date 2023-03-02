@@ -16,11 +16,11 @@ public class Result {
     }
 
     public String toString() {
-        return String.format("%s (%s) → %s (%s)",
+        return String.format("%s (%s) = %s (%s)",
                 sourceUnit.getFormattedValue(sourceAmount),
-                sourceUnit.toString(),
+                sourceUnit.getName().toLowerCase(),
                 targetUnit.getFormattedValue(result),
-                targetUnit.toString());
+                targetUnit.getName().toLowerCase());
     }
 
     public void printInConsole() {

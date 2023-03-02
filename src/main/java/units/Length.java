@@ -2,7 +2,7 @@ package units;
 
 public enum Length implements Unit {
     MEGA_METRO("Megametro", "Mm", 1000000.0),
-    QUILOMETRO("Kilômetro", "km", 1000.0),
+    QUILOMETRO("Quilômetro", "km", 1000.0),
     HECTOMETRO("Hectômetro", "Hm", 100.0),
     DECAMETRO("Decâmetro", "dam", 10.0),
     METRO("Metro", "m", 1.0),
