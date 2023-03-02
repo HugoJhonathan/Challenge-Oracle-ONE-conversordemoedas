@@ -35,14 +35,7 @@ public class Window extends JFrame {
     }
 
     public void init() {
-        try {
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
-            UIManager.put("JFrame.activeTitleBackground", Color.red);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
         setIconImage(Util.getImage("images/icon.png"));
-        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         setResizable(true);
         setSize(600, 600);
         setLocationRelativeTo(null);

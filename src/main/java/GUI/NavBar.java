@@ -5,6 +5,8 @@ import GUI.screens.Screen;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ColorChooserUI;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,7 +25,7 @@ public class NavBar extends JPanel {
     private JPanel footer;
     private final JPanel pageContentContainer;
     private final CardLayout cardLayout;
-    private final Map<Component, Component> navItemAndPainel = new HashMap<>();
+    private final Map<Component, JButton> navItemAndPainel = new HashMap<>();
     private final Color navBarColor = new Color(17, 17, 17);
     private final Color navBarSelected = new Color(0, 0, 0);
     private final String hiperlink = "Developed by hugo_";
@@ -61,20 +63,15 @@ public class NavBar extends JPanel {
     }
 
     public <T extends JPanel & ScreenProperties> void createItem(T screen) {
-        int padding = 10;
-        Border emptyBorder = BorderFactory.createEmptyBorder();
         JButton button = new JButton(screen.getName());
         button.setHorizontalAlignment(SwingConstants.LEFT);
-        button.setOpaque(false);
-        button.setBorder(emptyBorder);
-        setBackground(navBarColor);
         button.setIcon(screen.getImageIcon());
-        button.setBorder(new EmptyBorder(padding, padding, padding, padding));
+        button.setBorder(new EmptyBorder(10, 10, 10, 10));
         button.addActionListener(e -> selectPage(screen));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         navItems.add(button);
         pageContentContainer.add(screen, screen.getName());
-        navItemAndPainel.put((Component) screen, button);
+        navItemAndPainel.put(screen, button);
     }
 
     public JPanel getFooter() {
@@ -128,8 +125,9 @@ public class NavBar extends JPanel {
             frame.setTitle(screen.getTitle());
         }
         cardLayout.show(pageContentContainer, screen.getName());
-        Component[] navItens = navItems.getComponents();
-        Arrays.stream(navItens).forEach(item -> item.setBackground(navBarColor));
+        navItemAndPainel.forEach((sc, button) -> {
+            button.setBackground(navBarColor);
+        });
         Component navItem = navItemAndPainel.get(screen);
         navItem.setBackground(navBarSelected);
     }
