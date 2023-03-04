@@ -7,7 +7,7 @@ public enum Temperature implements Unit {
     NEWTON("Newton", "°N", 0.33, 0.0),
     REAUMUR("Reaumur", "°Re", 0.8, 0.0),
     RANKINE("Rankine", "°Ra", 1.8, 491.67),
-    DELISLE("Delisle", "°De", 2.0 / 3.0, -100.0 / 3.0);
+    DELISLE("Delisle", "°De", 0.666, -33.333);
 
     private final String name;
     private final String symbol;
@@ -29,6 +29,11 @@ public enum Temperature implements Unit {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Unit[] getAllUnits() {
+        return Temperature.values();
     }
 
     public double getFactor2() {

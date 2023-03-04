@@ -34,4 +34,9 @@ public enum DataStorage implements Unit {
         return name;
     }
 
+    @Override
+    public Unit[] getAllUnits() {
+        return DataStorage.values();
+    }
+
 }

@@ -35,4 +35,9 @@ public enum Length implements Unit {
         return symbol;
     }
 
+    @Override
+    public Unit[] getAllUnits() {
+        return Length.values();
+    }
+
 }

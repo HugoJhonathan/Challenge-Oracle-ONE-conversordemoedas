@@ -84,4 +84,9 @@ public enum Money implements Unit {
         return list;
     }
 
+    @Override
+    public Unit[] getAllUnits() {
+        return Money.values();
+    }
+
 }

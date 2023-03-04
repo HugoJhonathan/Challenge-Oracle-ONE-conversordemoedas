@@ -34,4 +34,9 @@ public enum Mass implements Unit {
         return symbol;
     }
 
+    @Override
+    public Unit[] getAllUnits() {
+        return Mass.values();
+    }
+
 }

@@ -8,6 +8,8 @@ public interface Unit {
 
     String getName();
 
+    Unit[] getAllUnits();
+
     default String getFormattedValue(double value) {
         return value + " " + getSymbol();
     }

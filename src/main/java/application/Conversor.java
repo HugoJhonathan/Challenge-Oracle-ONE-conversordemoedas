@@ -14,6 +14,3 @@ public abstract class Conversor {
     }
 
 }
-
-
-

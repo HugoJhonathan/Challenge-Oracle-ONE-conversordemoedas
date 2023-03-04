@@ -27,12 +27,11 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         return "Conversor de " + getName();
     }
 
-    private JLabel titleLabel;
     private JTextField input;
     private JTextField output;
     private JComboBox<Unit> selectInputUnit;
     private JComboBox<Unit> selectOutputUnit;
-    private JLabel jpanel;
+    private JTextPane  jpanel;
 
     public Screen() {
         init();
@@ -40,18 +39,33 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     }
 
     private void init() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(15, 15, 15, 15));
         setName(getName());
-        add(getTitleLabel());
-        add(getPanelForm());
-        add(getJpanel());
+        add(getPanelForm(), BorderLayout.PAGE_START);
+        add(getJpanel(), BorderLayout.PAGE_END);
     }
 
-    public JLabel getJpanel() {
+    private String createTableWithAllConversion(double amount, Unit unit) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(unit.getFormattedValue(amount));
+        sb.append(" (" + unit.getName() + ") é igual a:<br><html><table>");
+        for (Unit u : unit.getAllUnits()) {
+            double convert = unit.convert(amount, u);
+            sb.append("<tr>");
+            sb.append("<td>" + u.getFormattedValue(convert) + "</td>");
+            sb.append("<td>" + u.getName() + "</td>");
+            sb.append("</td>");
+        }
+        sb.append("</table></html>");
+        return sb.toString();
+    }
+
+    public JTextPane  getJpanel() {
         if (Objects.nonNull(jpanel)) return jpanel;
-        jpanel = new JLabel();
-        jpanel.setBackground(Color.red);
-        jpanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jpanel = new JTextPane ();
+        jpanel.setContentType("text/html");
+        jpanel.setOpaque(false);
         return jpanel;
     }
 
@@ -61,23 +75,11 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         gl_divForm.setHgap(15);
         JPanel divForm = new JPanel(gl_divForm);
         divForm.setMaximumSize(new Dimension(500, 100));
-        divForm.setBorder(new EmptyBorder(15, 15, 15, 15));
         divForm.add(getInput());
         divForm.add(getSelectInputUnit());
         divForm.add(getOutput());
         divForm.add(getSelectOutputUnit());
         return divForm;
-    }
-
-    public JLabel getTitleLabel() {
-        if (Objects.nonNull(titleLabel)) return titleLabel;
-        titleLabel = new JLabel();
-        titleLabel.setText("Conversor: " + getName());
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setVerticalAlignment(JLabel.CENTER);
-        titleLabel.setBorder(new EmptyBorder(15, 15, 15, 15));
-        return titleLabel;
     }
 
     public JTextField getInput() {
@@ -143,13 +145,14 @@ public abstract class Screen extends JPanel implements ScreenProperties {
             Unit sourceUnit = (Unit) selectInputUnit.getSelectedItem();
             Unit targetUnit = (Unit) selectOutputUnit.getSelectedItem();
             double amount = Double.parseDouble(input.getText());
+
             Result result = Conversor.convert(amount, sourceUnit, targetUnit);
             double resultDouble = result.getResult();
-            output.setText(targetUnit.getFormattedValue(resultDouble));
-            jpanel.setText(result.toString());
+            getOutput().setText(targetUnit.getFormattedValue(resultDouble));
+            getJpanel().setText(createTableWithAllConversion(amount, sourceUnit));
         } catch (NumberFormatException nfe) {
-            output.setText(null);
-            jpanel.setText(null);
+            getOutput().setText(null);
+            getJpanel().setText(null);
         }
     }
 
