@@ -10,7 +10,7 @@ public class ScreenMass extends Screen {
 
     @Override
     public Unit[] getValues() {
-        return Mass.values();
+        return Mass.getAll();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ScreenTemperature extends Screen {
 
     @Override
     public Unit[] getValues() {
-        return Temperature.values();
+        return Temperature.getAll();
     }
 
     @Override

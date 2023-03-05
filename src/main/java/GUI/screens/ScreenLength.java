@@ -10,7 +10,7 @@ public class ScreenLength extends Screen {
 
     @Override
     public Unit[] getValues() {
-        return Length.values();
+        return Length.getAll();
     }
 
     @Override

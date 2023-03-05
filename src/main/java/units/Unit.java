@@ -1,29 +1,40 @@
 package units;
 
-public interface Unit {
+import java.math.BigDecimal;
+import java.math.MathContext;
 
-    String getSymbol();
+public abstract class Unit<T extends Unit> {
 
-    double getFactor();
+    private String name;
+    private String symbol;
+    private double factor;
 
-    String getName();
+    public Unit(String name, String symbol, double factor) {
+        this.name = name;
+        this.symbol = symbol;
+        this.factor = factor;
+    }
 
-    Unit[] getAllUnits();
+    public BigDecimal convert(BigDecimal amount, T targetUnit) {
+        BigDecimal sourceFactorBd = new BigDecimal(String.valueOf(getFactor()));
+        BigDecimal targetFactorBd = new BigDecimal(String.valueOf(targetUnit.getFactor()));
+        return amount.multiply(sourceFactorBd).divide(targetFactorBd, MathContext.DECIMAL128);
+    }
 
-    default String getFormattedValue(double value) {
+    public String getFormattedValue(String value) {
         return value + " " + getSymbol();
     }
 
-    default void checkIfTheClassesAreEquals(Unit targetUnit) {
-        if (this.getClass() != targetUnit.getClass()) {
-            throw new RuntimeException("Unable to convert " + this.getClass().getSimpleName()
-                    + " to " + targetUnit.getClass().getSimpleName());
-        }
+    public String getSymbol() {
+        return symbol;
     }
 
-    default double convert(double amount, Unit targetUnit) {
-        checkIfTheClassesAreEquals(targetUnit);
-        return amount * getFactor() / targetUnit.getFactor();
+    public String getName() {
+        return name;
+    }
+
+    public double getFactor() {
+        return factor;
     }
 
 }

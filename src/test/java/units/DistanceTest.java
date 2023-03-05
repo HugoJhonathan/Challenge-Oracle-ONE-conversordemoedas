@@ -2,8 +2,8 @@ package units;
 
 import org.junit.Test;
 
-import static units.Tester.test;
 import static units.Length.*;
+import static units.Tester.test;
 
 public class DistanceTest {
 

@@ -2,13 +2,16 @@ package application;
 
 import units.Unit;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Result {
     private Unit sourceUnit;
     private Unit targetUnit;
-    private double sourceAmount;
-    private double result;
+    private BigDecimal sourceAmount;
+    private BigDecimal result;
 
-    public Result(Unit sourceUnit, Unit targetUnit, double initialValue, double result) {
+    public Result(Unit sourceUnit, Unit targetUnit, BigDecimal initialValue, BigDecimal result) {
         this.sourceUnit = sourceUnit;
         this.targetUnit = targetUnit;
         this.sourceAmount = initialValue;
@@ -17,17 +20,14 @@ public class Result {
 
     public String toString() {
         return String.format("%s (%s) = %s (%s)",
-                sourceUnit.getFormattedValue(sourceAmount),
+                sourceUnit.getFormattedValue(String.valueOf(sourceAmount)),
                 sourceUnit.getName().toLowerCase(),
-                targetUnit.getFormattedValue(result),
+                targetUnit.getFormattedValue(getResult().toPlainString()),
                 targetUnit.getName().toLowerCase());
     }
 
-    public void printInConsole() {
-        System.out.println(this);
-    }
-
-    public double getResult() {
+    public BigDecimal getResult() {
+        result = result.setScale(4, RoundingMode.HALF_UP).stripTrailingZeros();
         return result;
     }
 }

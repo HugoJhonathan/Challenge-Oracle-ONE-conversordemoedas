@@ -1,43 +1,28 @@
 package units;
 
-public enum Length implements Unit {
-    MEGA_METRO("Megametro", "Mm", 1000000.0),
-    QUILOMETRO("Quilômetro", "km", 1000.0),
-    HECTOMETRO("Hectômetro", "Hm", 100.0),
-    DECAMETRO("Decâmetro", "dam", 10.0),
-    METRO("Metro", "m", 1.0),
-    DECIMETRO("Decímetro", "dm", 0.1),
-    CENTIMETRO("Centímetro", "cm", 0.01),
-    MILIMETRO("Milímetro", "mm", 0.001);
+import java.util.LinkedList;
+import java.util.List;
 
-    private final String symbol;
-    private final double factor;
-    private final String name;
+public class Length extends Unit<Length> {
 
-    Length(String name, String symbol, double factor) {
-        this.name = name;
-        this.symbol = symbol;
-        this.factor = factor;
+    private static List<Length> all = new LinkedList<>();
+    
+    public static Length MEGA_METRO = new Length("Megametro", "Mm", 1000000.0);
+    public static Length QUILOMETRO = new Length("Quilômetro", "km", 1000.0);
+    public static Length HECTOMETRO = new Length("Hectômetro", "Hm", 100.0);
+    public static Length DECAMETRO = new Length("Decâmetro", "dam", 10.0);
+    public static Length METRO = new Length("Metro", "m", 1.0);
+    public static Length DECIMETRO = new Length("Decímetro", "dm", 0.1);
+    public static Length CENTIMETRO = new Length("Centímetro", "cm", 0.01);
+    public static Length MILIMETRO = new Length("Milímetro", "mm", 0.001);
+
+    public Length(String name, String symbol, double factor) {
+        super(name, symbol, factor);
+        all.add(this);
     }
 
-    @Override
-    public double getFactor() {
-        return factor;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
-
-    @Override
-    public Unit[] getAllUnits() {
-        return Length.values();
+    public static Length[] getAll() {
+        return all.toArray(new Length[0]);
     }
 
 }

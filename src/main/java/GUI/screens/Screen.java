@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -31,7 +32,7 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     private JTextField output;
     private JComboBox<Unit> selectInputUnit;
     private JComboBox<Unit> selectOutputUnit;
-    private JTextPane  jpanel;
+    private JTextPane jpanel;
 
     public Screen() {
         init();
@@ -46,24 +47,24 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         add(getJpanel(), BorderLayout.PAGE_END);
     }
 
-    private String createTableWithAllConversion(double amount, Unit unit) {
+    private String createTableWithAllConversion(BigDecimal amount, Unit unit) {
         StringBuilder sb = new StringBuilder();
-        sb.append(unit.getFormattedValue(amount));
-        sb.append(" (" + unit.getName() + ") é igual a:<br><html><table>");
-        for (Unit u : unit.getAllUnits()) {
-            double convert = unit.convert(amount, u);
+        String value = unit.getFormattedValue(String.valueOf(amount));
+        sb.append("<table><th colspan=2>" + value + " (" + unit.getName() + ") é igual a:</th>");
+        for (Unit u : getValues()) {
+            Result convert = Conversor.convert(amount, unit, u);
             sb.append("<tr>");
-            sb.append("<td>" + u.getFormattedValue(convert) + "</td>");
+            sb.append("<td>" + u.getFormattedValue(convert.getResult().toPlainString()) + "</td>");
             sb.append("<td>" + u.getName() + "</td>");
             sb.append("</td>");
         }
-        sb.append("</table></html>");
+        sb.append("</table>");
         return sb.toString();
     }
 
-    public JTextPane  getJpanel() {
+    public JTextPane getJpanel() {
         if (Objects.nonNull(jpanel)) return jpanel;
-        jpanel = new JTextPane ();
+        jpanel = new JTextPane();
         jpanel.setContentType("text/html");
         jpanel.setOpaque(false);
         return jpanel;
@@ -144,11 +145,11 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         try {
             Unit sourceUnit = (Unit) selectInputUnit.getSelectedItem();
             Unit targetUnit = (Unit) selectOutputUnit.getSelectedItem();
-            double amount = Double.parseDouble(input.getText());
+            BigDecimal amount = new BigDecimal(input.getText());
 
             Result result = Conversor.convert(amount, sourceUnit, targetUnit);
-            double resultDouble = result.getResult();
-            getOutput().setText(targetUnit.getFormattedValue(resultDouble));
+            String resultString = result.getResult().toPlainString();
+            getOutput().setText(targetUnit.getFormattedValue(resultString));
             getJpanel().setText(createTableWithAllConversion(amount, sourceUnit));
         } catch (NumberFormatException nfe) {
             getOutput().setText(null);

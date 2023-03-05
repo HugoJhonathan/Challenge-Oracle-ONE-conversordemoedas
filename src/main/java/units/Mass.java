@@ -1,42 +1,27 @@
 package units;
 
-public enum Mass implements Unit {
-    KILOGRAMA("Quilograma", "Kg", 1000.0),
-    HECTOGRAMA("Hectograma", "hg", 100.0),
-    DECAGRAMA("Decagrama", "dag", 10.0),
-    GRAMA("Grama", "g", 1.0),
-    DECOGRAMA("Decograma", "dg", 0.1),
-    CENTIGRAMA("Centigrama", "cg", 0.01),
-    MILIGRAMA("Miligrama", "mg", 0.001);
+import java.util.LinkedList;
+import java.util.List;
 
-    private final String symbol;
-    private final double factor;
-    private final String name;
+public class Mass extends Unit<Mass> {
 
-    Mass(String name, String symbol, double factor) {
-        this.name = name;
-        this.symbol = symbol;
-        this.factor = factor;
+    private static List<Mass> all = new LinkedList<>();
+
+    public static Mass KILOGRAMA = new Mass("Quilograma", "Kg", 1000.0);
+    public static Mass HECTOGRAMA = new Mass("Hectograma", "hg", 100.0);
+    public static Mass DECAGRAMA = new Mass("Decagrama", "dag", 10.0);
+    public static Mass GRAMA = new Mass("Grama", "g", 1.0);
+    public static Mass DECOGRAMA = new Mass("Decograma", "dg", 0.1);
+    public static Mass CENTIGRAMA = new Mass("Centigrama", "cg", 0.01);
+    public static Mass MILIGRAMA = new Mass("Miligrama", "mg", 0.001);
+
+    public Mass(String name, String symbol, double factor) {
+        super(name, symbol, factor);
+        all.add(this);
     }
 
-    @Override
-    public double getFactor() {
-        return factor;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
-
-    @Override
-    public Unit[] getAllUnits() {
-        return Mass.values();
+    public static Mass[] getAll() {
+        return all.toArray(new Mass[0]);
     }
 
 }

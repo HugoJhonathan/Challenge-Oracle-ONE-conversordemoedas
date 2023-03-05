@@ -10,7 +10,7 @@ public class ScreenMoney extends Screen {
 
     @Override
     public Unit[] getValues() {
-        return Money.values();
+        return Money.getAll();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ScreenDataStorage extends Screen {
 
     @Override
     public Unit[] getValues() {
-        return DataStorage.values();
+        return DataStorage.getAll();
     }
 
     @Override

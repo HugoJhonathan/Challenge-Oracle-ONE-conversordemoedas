@@ -1,42 +1,27 @@
 package units;
 
-public enum DataStorage implements Unit {
-    PETABYTE("Petabyte", "PB", 8.0 * 1024 * 1024 * 1024 * 1024 * 1024),
-    TERABYTE("Terabyte", "TB", 8.0 * 1024 * 1024 * 1024 * 1024),
-    GIGABYTE("Gigabyte", "GB", 8.0 * 1024 * 1024 * 1024),
-    MEGABYTE("Megabyte", "MB", 8.0 * 1024 * 1024),
-    KILOBYTE("Kilobyte", "KB", 8.0 * 1024),
-    BYTE("Byte", "B", 8),
-    BIT("bit", "b", 1);
+import java.util.LinkedList;
+import java.util.List;
 
-    private final String symbol;
-    private final double factor;
-    private final String name;
+public class DataStorage extends Unit<DataStorage> {
 
-    DataStorage(String name, String symbol, double factor) {
-        this.name = name;
-        this.symbol = symbol;
-        this.factor = factor;
+    private static List<DataStorage> all = new LinkedList<>();
+
+    public static DataStorage PETABYTE = new DataStorage("Petabyte", "PB", 8.0 * 1024 * 1024 * 1024 * 1024 * 1024);
+    public static DataStorage TERABYTE = new DataStorage("Terabyte", "TB", 8.0 * 1024 * 1024 * 1024 * 1024);
+    public static DataStorage GIGABYTE = new DataStorage("Gigabyte", "GB", 8.0 * 1024 * 1024 * 1024);
+    public static DataStorage MEGABYTE = new DataStorage("Megabyte", "MB", 8.0 * 1024 * 1024);
+    public static DataStorage KILOBYTE = new DataStorage("Kilobyte", "KB", 8.0 * 1024);
+    public static DataStorage BYTE = new DataStorage("Byte", "B", 8);
+    public static DataStorage BIT = new DataStorage("bit", "b", 1);
+
+    public DataStorage(String name, String symbol, double factor) {
+        super(name, symbol, factor);
+        all.add(this);
     }
 
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
-
-    @Override
-    public double getFactor() {
-        return factor;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Unit[] getAllUnits() {
-        return DataStorage.values();
+    public static DataStorage[] getAll() {
+        return all.toArray(new DataStorage[0]);
     }
 
 }

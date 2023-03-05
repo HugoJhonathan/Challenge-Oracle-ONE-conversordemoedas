@@ -4,6 +4,8 @@ import application.Conversor;
 import application.Result;
 import org.junit.Assert;
 
+import java.math.BigDecimal;
+
 public class Tester {
 
     public static Builder test(double v, Unit unit) {
@@ -11,21 +13,22 @@ public class Tester {
     }
 
     public static class Builder {
-        private double value;
-        private double resultEsperado;
+        private BigDecimal value;
+        private BigDecimal resultEsperado;
         private Unit para;
         private Unit de;
 
         private Builder(double v, Unit unit) {
-            value = v;
+            value = new BigDecimal(String.valueOf(v));
             de = unit;
         }
 
         public void isEquals(double result, Unit para_) {
             para = para_;
-            resultEsperado = result;
+            resultEsperado = new BigDecimal(String.valueOf(result));
             Result res1 = Conversor.convert(value, de, para);
-            Assert.assertEquals(resultEsperado, res1.getResult(), 0.0);
+            Assert.assertTrue(resultEsperado.compareTo(res1.getResult()) == 0);
+            Assert.assertEquals(0, resultEsperado.compareTo(res1.getResult()));
         }
     }
 

@@ -1,92 +1,45 @@
 package units;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
-import java.util.Objects;
 
-public enum Money implements Unit {
-    REAL("Real", "BRL", 0.1919),
-    DOLAR("Dólar", "USD", 1.00),
-    EURO("Euro", "EUR", 1.06),
-    LIBRA("Libra", "GBP", 1.21),
-    PESO_ARGENTINO("Peso Argentino", "ARS", 0.005125),
-    PESO_CHILENO("Peso Chileno", "CLP", 0.00126);
+public class Money extends Unit<Money> {
 
-    private final String name;
-    private final String symbol;
-    private double dollarEquivalent;
+    private static List<Money> all = new ArrayList<>();
+    private static NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-    Money(String name, String symbol, double dollarEquivalent) {
-        try {
-            Currency.getInstance(symbol);
-        } catch (IllegalArgumentException e) {
-            System.out.println(Currency.getAvailableCurrencies());
-            throw new RuntimeException("Currency symbol " + symbol + " does not exist!");
-        }
-        this.name = name;
-        this.symbol = symbol;
-        this.dollarEquivalent = dollarEquivalent;
+    public static Money REAL = new Money("Real", "BRL", 0.1919);
+    public static Money DOLAR = new Money("Dólar", "USD", 1.00);
+    public static Money EURO = new Money("Euro", "EUR", 1.06);
+    public static Money LIBRA = new Money("Libra", "GBP", 1.21);
+    public static Money PESO_ARGENTINO = new Money("Peso Argentino", "ARS", 0.005125);
+    public static Money PESO_CHILENO = new Money("Peso Chileno", "CLP", 0.00126);
+
+    private Money(String symbol, String name, double dolarEquivalent) {
+        super(symbol, name, dolarEquivalent);
+        Money.all.add(this);
     }
 
     @Override
-    public String getFormattedValue(double value) {
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
+    public BigDecimal convert(BigDecimal amount, Money targetUnit) {
+        BigDecimal sourceFactorBd = new BigDecimal(String.valueOf(getFactor()));
+        BigDecimal targetFactorBd = new BigDecimal(String.valueOf(targetUnit.getFactor()));
+        BigDecimal calc1 = sourceFactorBd.divide(targetFactorBd, MathContext.DECIMAL128);
+        return calc1.multiply(amount);
+    }
+
+    @Override
+    public String getFormattedValue(String value) {
         nf.setCurrency(Currency.getInstance(getSymbol()));
-        return nf.format(value);
+        return nf.format(new BigDecimal(value));
     }
 
-    @Override
-    public double convert(double amount, Unit targetUnit) {
-        checkIfTheClassesAreEquals(targetUnit);
-        double mult = getFactor() / targetUnit.getFactor();
-        return mult * amount;
-    }
-
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
-
-    @Override
-    public double getFactor() {
-        return dollarEquivalent;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public double getDollarEquivalent() {
-        return dollarEquivalent;
-    }
-
-    public void setDollarEquivalent(double dollarEquivalent) {
-        this.dollarEquivalent = dollarEquivalent;
-    }
-
-    static public Money getBySymbol(String symbol) {
-        for (Money m : Money.values()) {
-            if (Objects.equals(m.getSymbol(), symbol)) {
-                return m;
-            }
-        }
-        throw new IllegalArgumentException("There is no monetary value with the symbol " + symbol);
-    }
-
-    static public List<String> getAllSymbols() {
-        List<String> list = new ArrayList<>();
-        for (Money m : Money.values()) {
-            list.add(m.getSymbol());
-        }
-        return list;
-    }
-
-    @Override
-    public Unit[] getAllUnits() {
-        return Money.values();
+    public static Money[] getAll() {
+        return all.toArray(new Money[0]);
     }
 
 }
