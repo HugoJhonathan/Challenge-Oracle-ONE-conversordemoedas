@@ -7,10 +7,10 @@
 <img height="80" margin="10" src="https://i.imgur.com/9Gq6RS0.png">
 </div>
 
-
 ### Sprint 01: Crie seu próprio conversor de moeda
 
-
+<br> 
+  
 ## História
 
 Nesta oportunidade foi solicitado para nós Devs a criação de um conversor de moeda utilizando a linguagem Java. As
@@ -28,6 +28,8 @@ Lembrando que deve ser possível também converter de forma inversa.
 
 Como desafio extra incentivamos vocês a deixar fluir sua criatividade, se posso converter moedas, será que posso tal vez
 adicionar a meu programa outro tipo de conversões como temperatura por exemplo?
+
+<br>
 
 ## Resultado
 
@@ -73,6 +75,8 @@ elas.
 - Para criar qualquer outra tela, basta criar um classe que estenda de JPanel e implemente a
   interface <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/GUI/ScreenProperties.java">
   Screen_Properties</a> e adicioná-la à NavBar.
+
+<br>
 
 ## Tecnologias utilizadas
 
