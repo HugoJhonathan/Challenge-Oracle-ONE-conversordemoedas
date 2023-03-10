@@ -35,7 +35,7 @@ Download JAR<a>
 - Uma unidade pode ser **convertida para outra** chamando seu próprio método convert, assim:
 
 ```java
-BigDecimal result=REAL.convert(new BigDecimal("1"),DOLAR);
+BigDecimal result = REAL.convert(new BigDecimal("1"), DOLAR);
 ```
 
 ! O fator multiplicador das moedas é o valor equivalente de 1 em relação ao Dolar, para facilitar a conversão entre
@@ -47,8 +47,7 @@ elas.
   onde podemos criar componentes e interfaces gráficas com o paradígma orientado a objetos.
 
 - [x] Fácil expansão e adição de novas unidades de conversão
-- Para adicionar novas unidades, basta criar uma classe/enum que implemente a
-  interface <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/units/Unit.java">
+- Para adicionar novas unidades, basta criar uma subclasse de <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/units/Unit.java">
   Unit</a>.
 - Para adicionar a tela referente a essa nova unidade de conversão basta:
 
