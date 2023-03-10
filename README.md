@@ -1,8 +1,12 @@
+<img align=left src="https://i.imgur.com/P9fjzh4.png" height=150 alt="badge-challenge">
+
 <h2 align=center>Challenge ONE Back End - Java</h2>
 
 <div align=center>
+
 <img height="80" margin="10" src="https://i.imgur.com/9Gq6RS0.png">
 </div>
+
 
 ### Sprint 01: Crie seu próprio conversor de moeda
 
@@ -31,6 +35,7 @@ adicionar a meu programa outro tipo de conversões como temperatura por exemplo?
 Download JAR<a>
 
 <img src="https://i.imgur.com/J6cdkmj.png">
+
 
 ### Conversão
 
