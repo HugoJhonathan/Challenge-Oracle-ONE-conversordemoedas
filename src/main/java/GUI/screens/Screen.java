@@ -3,8 +3,6 @@ package GUI.screens;
 import GUI.ScreenProperties;
 import GUI.util.DistanceRenderer;
 import GUI.util.Util;
-import application.Conversor;
-import application.Result;
 import units.Unit;
 
 import javax.swing.*;
@@ -50,11 +48,11 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     private String createTableWithAllConversion(BigDecimal amount, Unit unit) {
         StringBuilder sb = new StringBuilder();
         String value = unit.getFormattedValue(String.valueOf(amount));
-        sb.append("<table><th colspan=2>" + value + " (" + unit.getName() + ") é igual a:</th>");
+        sb.append("<table><th colspan=2 align=left>" + value + " (" + unit.getName() + ") equivale a:</th>");
         for (Unit u : getValues()) {
-            Result convert = Conversor.convert(amount, unit, u);
+            BigDecimal convert = unit.convert(amount, u);
             sb.append("<tr>");
-            sb.append("<td>" + u.getFormattedValue(convert.getResult().toPlainString()) + "</td>");
+            sb.append("<td>" + u.getFormattedValue(convert.toPlainString()) + "</td>");
             sb.append("<td>" + u.getName() + "</td>");
             sb.append("</td>");
         }
@@ -147,12 +145,16 @@ public abstract class Screen extends JPanel implements ScreenProperties {
             Unit targetUnit = (Unit) selectOutputUnit.getSelectedItem();
             BigDecimal amount = new BigDecimal(input.getText());
 
-            Result result = Conversor.convert(amount, sourceUnit, targetUnit);
-            String resultString = result.getResult().toPlainString();
+            BigDecimal result = sourceUnit.convert(amount, targetUnit);
+            String resultString = result.toPlainString();
             getOutput().setText(targetUnit.getFormattedValue(resultString));
             getJpanel().setText(createTableWithAllConversion(amount, sourceUnit));
         } catch (NumberFormatException nfe) {
-            getOutput().setText(null);
+            if (!getInput().getText().isEmpty()) {
+                getOutput().setText("Invalid input value!");
+            } else {
+                getOutput().setText(null);
+            }
             getJpanel().setText(null);
         }
     }

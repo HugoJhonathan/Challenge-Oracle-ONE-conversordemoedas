@@ -1,5 +1,3 @@
-package application;
-
 import GUI.Window;
 import com.formdev.flatlaf.FlatDarkLaf;
 import service.MoneyService;

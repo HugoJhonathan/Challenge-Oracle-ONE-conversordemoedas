@@ -38,6 +38,7 @@ public class Window extends JFrame {
         setIconImage(Util.getImage("images/icon.png"));
         setResizable(true);
         setSize(600, 600);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         add(getNavBar(), BorderLayout.WEST);
         add(getPageContentContainer(), BorderLayout.CENTER);

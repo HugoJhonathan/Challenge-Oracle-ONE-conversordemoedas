@@ -35,21 +35,7 @@ Download JAR<a>
 - Uma unidade pode ser **convertida para outra** chamando seu próprio método convert, assim:
 
 ```java
-double result=REAL.convert(1,DOLAR);
-```
-
-- Ou através do método **convert** da classe **Conversor**, que converte e retorna um objeto do tipo **Result**:
-
-```java
-Result result=Conversor.convert(1,REAL,DOLAR);
-
-// class Result:
-// sourceUnit   = REAL
-// targetUnit   = DOLAR
-// sourceAmount = 1
-// result       = 0.1919
-// toString()   = "R$ 1,00 (real) = US$ 0,19 (dólar)"
-
+BigDecimal result=REAL.convert(new BigDecimal("1"),DOLAR);
 ```
 
 ! O fator multiplicador das moedas é o valor equivalente de 1 em relação ao Dolar, para facilitar a conversão entre
@@ -78,3 +64,17 @@ elas.
 - Para criar qualquer outra tela, basta criar um classe que estenda de JPanel e implemente a
   interface <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/GUI/ScreenProperties.java">
   Screen_Properties</a> e adicioná-la à NavBar.
+
+## Tecnologias utilizadas
+
+- Linguagem: Java 8
+- IDE: IntelliJ
+- Inteface (GUI): Swing
+- Testes: JUnit
+- Currency API: <a href="https://docs.awesomeapi.com.br/api-de-moedas">AwesomeAPI-api-de-moedas</a>
+
+<br><br>
+[<img align="left" height="80" margin="10" src="https://i.imgur.com/MnKGoqa.png">](https://www.oracle.com/br/education/oracle-next-education/)
+Aplicação Desktop de **Conversor de Unidades** desenvolvido como Challenge, durante a formação Backend Java, do
+programa <a href="https://www.oracle.com/br/education/oracle-next-education/">ONE (Oracle Next Education)</a> através da
+plataforma de ensino <a href="https://www.alura.com.br/">Alura</a>. 03/2023
