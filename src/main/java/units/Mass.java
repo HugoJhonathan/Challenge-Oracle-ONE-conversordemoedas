@@ -15,8 +15,8 @@ public class Mass extends Unit<Mass> {
     public static Mass CENTIGRAMA = new Mass("Centigrama", "cg", 0.01);
     public static Mass MILIGRAMA = new Mass("Miligrama", "mg", 0.001);
 
-    public Mass(String name, String symbol, double factor) {
-        super(name, symbol, factor);
+    private Mass(String name, String symbol, double gramsEquivalent) {
+        super(name, symbol, gramsEquivalent);
         all.add(this);
     }
 

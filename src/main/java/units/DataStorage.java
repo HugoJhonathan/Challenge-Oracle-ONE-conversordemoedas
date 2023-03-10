@@ -15,8 +15,8 @@ public class DataStorage extends Unit<DataStorage> {
     public static DataStorage BYTE = new DataStorage("Byte", "B", 8);
     public static DataStorage BIT = new DataStorage("bit", "b", 1);
 
-    public DataStorage(String name, String symbol, double factor) {
-        super(name, symbol, factor);
+    private DataStorage(String name, String symbol, double bitsEquivalent) {
+        super(name, symbol, bitsEquivalent);
         all.add(this);
     }
 

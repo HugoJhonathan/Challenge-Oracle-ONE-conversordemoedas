@@ -6,7 +6,7 @@ import java.util.List;
 public class Length extends Unit<Length> {
 
     private static List<Length> all = new LinkedList<>();
-    
+
     public static Length MEGA_METRO = new Length("Megametro", "Mm", 1000000.0);
     public static Length QUILOMETRO = new Length("Quilômetro", "km", 1000.0);
     public static Length HECTOMETRO = new Length("Hectômetro", "Hm", 100.0);
@@ -16,8 +16,8 @@ public class Length extends Unit<Length> {
     public static Length CENTIMETRO = new Length("Centímetro", "cm", 0.01);
     public static Length MILIMETRO = new Length("Milímetro", "mm", 0.001);
 
-    public Length(String name, String symbol, double factor) {
-        super(name, symbol, factor);
+    private Length(String name, String symbol, double mettersEquivalent) {
+        super(name, symbol, mettersEquivalent);
         all.add(this);
     }
 
