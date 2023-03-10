@@ -2,6 +2,8 @@
 
 ### Sprint 01: Crie seu próprio conversor de moeda
 
+<img height="80" margin="10" src="https://i.imgur.com/9Gq6RS0.png">
+
 ## História
 
 Nesta oportunidade foi solicitado para nós Devs a criação de um conversor de moeda utilizando a linguagem Java. As
@@ -67,13 +69,13 @@ elas.
 ## Tecnologias utilizadas
 
 - Linguagem: Java 8
-- IDE: IntelliJ
-- Inteface (GUI): Swing
-- Testes: JUnit
+- IDE: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>
+- Inteface (GUI): Swing c/ <a href="https://www.formdev.com/flatlaf/">FlatLaf</a>
+- Testes: <a href="https://junit.org/junit5/">JUnit</a>
 - Currency API: <a href="https://docs.awesomeapi.com.br/api-de-moedas">AwesomeAPI-api-de-moedas</a>
 
 <br><br>
-[<img align="left" height="80" margin="10" src="https://i.imgur.com/MnKGoqa.png">](https://www.oracle.com/br/education/oracle-next-education/)
+[<img align="left" height="50" margin="10" src="https://i.imgur.com/RYYUpCK.png">](https://www.oracle.com/br/education/oracle-next-education/)
 Aplicação Desktop de **Conversor de Unidades** desenvolvido como Challenge, durante a formação Backend Java, do
 programa <a href="https://www.oracle.com/br/education/oracle-next-education/">ONE (Oracle Next Education)</a> através da
-plataforma de ensino <a href="https://www.alura.com.br/">Alura</a>. 03/2023
+plataforma de ensino <a href="https://www.alura.com.br/">Alura</a>.
