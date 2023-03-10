@@ -1,7 +1,5 @@
 package units;
 
-import application.Conversor;
-import application.Result;
 import org.junit.Assert;
 
 import java.math.BigDecimal;
@@ -26,9 +24,9 @@ public class Tester {
         public void isEquals(double result, Unit para_) {
             para = para_;
             resultEsperado = new BigDecimal(String.valueOf(result));
-            Result res1 = Conversor.convert(value, de, para);
-            Assert.assertTrue(resultEsperado.compareTo(res1.getResult()) == 0);
-            Assert.assertEquals(0, resultEsperado.compareTo(res1.getResult()));
+            BigDecimal res1 = de.convert(value, para);
+            Assert.assertTrue(resultEsperado.compareTo(res1) == 0);
+            Assert.assertEquals(0, resultEsperado.compareTo(res1));
         }
     }
 

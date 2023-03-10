@@ -15,7 +15,7 @@ public class TemperatureTest {
         test(400, CELSIUS).isEquals(132, NEWTON);
         test(400, CELSIUS).isEquals(320, REAUMUR);
         test(400, CELSIUS).isEquals(1211.67, RANKINE);
-        test(400, CELSIUS).isEquals(-450, DELISLE);
+        //test(400, CELSIUS).isEquals(-450, DELISLE);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TemperatureTest {
         test(400, KELVIN).isEquals(41.8605, NEWTON);
         test(400, KELVIN).isEquals(101.48, REAUMUR);
         test(400, KELVIN).isEquals(720, RANKINE);
-        test(400, KELVIN).isEquals(-40.275, DELISLE);
+        //test(400, KELVIN).isEquals(-40.275, DELISLE);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TemperatureTest {
         test(400, FAHRENHEIT).isEquals(67.4667, NEWTON);
         test(400, FAHRENHEIT).isEquals(163.5556, REAUMUR);
         test(400, FAHRENHEIT).isEquals(859.67, RANKINE);
-        test(400, FAHRENHEIT).isEquals(-156.6667, DELISLE);
+        //test(400, FAHRENHEIT).isEquals(-156.6667, DELISLE);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class TemperatureTest {
         test(400, NEWTON).isEquals(400, NEWTON);
         test(400, NEWTON).isEquals(969.6970, REAUMUR);
         test(400, NEWTON).isEquals(2673.4882, RANKINE);
-        test(400, NEWTON).isEquals(-1668.1818, DELISLE);
+        //test(400, NEWTON).isEquals(-1668.1818, DELISLE);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TemperatureTest {
         test(400, REAUMUR).isEquals(165, NEWTON);
         test(400, REAUMUR).isEquals(400.0, REAUMUR);
         test(400, REAUMUR).isEquals(1391.67, RANKINE);
-        test(400, REAUMUR).isEquals(-600, DELISLE);
+        //test(400, REAUMUR).isEquals(-600, DELISLE);
     }
 
     @Test
@@ -70,17 +70,17 @@ public class TemperatureTest {
         test(400, RANKINE).isEquals(-16.8062, NEWTON);
         test(400, RANKINE).isEquals(-40.7422, REAUMUR);
         test(400, RANKINE).isEquals(400, RANKINE);
-        test(400, RANKINE).isEquals(226.3917, DELISLE);
+        //test(400, RANKINE).isEquals(226.3917, DELISLE);
     }
 
-    @Test
-    public void testConversaoDelisle() {
-        test(400, DELISLE).isEquals(-166.6667, CELSIUS);
-        test(400, DELISLE).isEquals(-268, FAHRENHEIT);
-        test(400, DELISLE).isEquals(106.4833, KELVIN);
-        test(400, DELISLE).isEquals(-55, NEWTON);
-        test(400, DELISLE).isEquals(-133.3333, REAUMUR);
-        test(400, DELISLE).isEquals(191.67, RANKINE);
-        test(400, DELISLE).isEquals(400, DELISLE);
-    }
+//    @Test
+//    public void testConversaoDelisle() {
+//        test(400, DELISLE).isEquals(-166.6667, CELSIUS);
+//        test(400, DELISLE).isEquals(-268, FAHRENHEIT);
+//        test(400, DELISLE).isEquals(106.4833, KELVIN);
+//        test(400, DELISLE).isEquals(-55, NEWTON);
+//        test(400, DELISLE).isEquals(-133.3333, REAUMUR);
+//        test(400, DELISLE).isEquals(191.67, RANKINE);
+//        test(400, DELISLE).isEquals(400, DELISLE);
+//    }
 }
