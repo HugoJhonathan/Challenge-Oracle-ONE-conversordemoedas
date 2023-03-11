@@ -12,12 +12,12 @@ public class Temperature extends Unit<Temperature> {
     private static List<Temperature> all = new LinkedList<>();
     private static NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-    public static Temperature CELSIUS = new Temperature("Celsius", "°C", 1.0, 0.0);
-    public static Temperature FAHRENHEIT = new Temperature("Fahrenheit", "°F", 1.8, 32.0);
-    public static Temperature KELVIN = new Temperature("Kelvin", "K", 1.0, 273.15);
-    public static Temperature NEWTON = new Temperature("Newton", "°N", 0.33, 0.0);
-    public static Temperature REAUMUR = new Temperature("Reaumur", "°Re", 0.8, 0.0);
-    public static Temperature RANKINE = new Temperature("Rankine", "°Ra", 1.8, 491.67);
+    public static final Temperature CELSIUS = new Temperature("Celsius", "°C", 1.0, 0.0);
+    public static final Temperature FAHRENHEIT = new Temperature("Fahrenheit", "°F", 1.8, 32.0);
+    public static final Temperature KELVIN = new Temperature("Kelvin", "K", 1.0, 273.15);
+    public static final Temperature NEWTON = new Temperature("Newton", "°N", 0.33, 0.0);
+    public static final Temperature REAUMUR = new Temperature("Reaumur", "°Re", 0.8, 0.0);
+    public static final Temperature RANKINE = new Temperature("Rankine", "°Ra", 1.8, 491.67);
 
     private double factor2;
 
