@@ -3,6 +3,7 @@ package GUI.screens;
 import GUI.ScreenProperties;
 import GUI.util.DistanceRenderer;
 import GUI.util.Util;
+import units.Money;
 import units.Unit;
 
 import javax.swing.*;
@@ -15,6 +16,19 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class Screen extends JPanel implements ScreenProperties {
+
+    private JTextField input;
+    private JTextField output;
+    protected JComboBox<Unit> selectInputUnit;
+    protected JComboBox<Unit> selectOutputUnit;
+    protected JPanel panelForm;
+    private JTextPane jpanel;
+
+    public Screen() {
+        init();
+        events();
+    }
+
     public abstract Unit[] getValues();
 
     public abstract String getName();
@@ -26,22 +40,12 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         return "Conversor de " + getName();
     }
 
-    private JTextField input;
-    private JTextField output;
-    private JComboBox<Unit> selectInputUnit;
-    private JComboBox<Unit> selectOutputUnit;
-    private JTextPane jpanel;
-
-    public Screen() {
-        init();
-        events();
-    }
-
-    private void init() {
+    protected void init() {
+        initPanelForm();
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(15, 15, 15, 15));
         setName(getName());
-        add(getPanelForm(), BorderLayout.PAGE_START);
+        add(panelForm, BorderLayout.PAGE_START);
         add(getJpanel(), BorderLayout.PAGE_END);
     }
 
@@ -50,9 +54,9 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         String value = unit.getFormattedValue(String.valueOf(amount));
         sb.append("<table><th colspan=2 align=left>" + value + " (" + unit.getName() + ") equivale a:</th>");
         for (Unit u : getValues()) {
-            BigDecimal convert = unit.convert(amount, u);
+            String convert = unit.convert(amount, u).toPlainString();
             sb.append("<tr>");
-            sb.append("<td>" + u.getFormattedValue(convert.toPlainString()) + "</td>");
+            sb.append("<td>" + u.getFormattedValue(convert) + "</td>");
             sb.append("<td>" + u.getName() + "</td>");
             sb.append("</td>");
         }
@@ -65,20 +69,20 @@ public abstract class Screen extends JPanel implements ScreenProperties {
         jpanel = new JTextPane();
         jpanel.setContentType("text/html");
         jpanel.setOpaque(false);
+        jpanel.setEditable(false);
         return jpanel;
     }
 
-    public JPanel getPanelForm() {
-        GridLayout gl_divForm = new GridLayout(2, 0);
+    private void initPanelForm() {
+        GridLayout gl_divForm = new GridLayout(0, 2);
         gl_divForm.setVgap(15);
         gl_divForm.setHgap(15);
         JPanel divForm = new JPanel(gl_divForm);
-        divForm.setMaximumSize(new Dimension(500, 100));
         divForm.add(getInput());
         divForm.add(getSelectInputUnit());
         divForm.add(getOutput());
         divForm.add(getSelectOutputUnit());
-        return divForm;
+        panelForm = divForm;
     }
 
     public JTextField getInput() {
@@ -89,7 +93,7 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     }
 
     public JComboBox<Unit> getSelectInputUnit() {
-        if (selectInputUnit != null) return selectInputUnit;
+        if (Objects.nonNull(selectInputUnit)) return selectInputUnit;
         selectInputUnit = new JComboBox<>();
         Arrays.stream(getValues()).forEach(el -> {
             this.selectInputUnit.addItem(el);
@@ -99,7 +103,7 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     }
 
     public JComboBox<Unit> getSelectOutputUnit() {
-        if (selectOutputUnit != null) return selectOutputUnit;
+        if (Objects.nonNull(selectOutputUnit)) return selectOutputUnit;
         selectOutputUnit = new JComboBox<>();
         Arrays.stream(getValues()).forEach(el -> {
             this.selectOutputUnit.addItem(el);
@@ -110,7 +114,7 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     }
 
     public JTextField getOutput() {
-        if (output != null) return output;
+        if (Objects.nonNull(output)) return output;
         output = new JTextField();
         output.setBorder(null);
         output.setEditable(false);
@@ -140,13 +144,18 @@ public abstract class Screen extends JPanel implements ScreenProperties {
     }
 
     protected void btnCalcularClick() {
+        Unit sourceUnit = (Unit) selectInputUnit.getSelectedItem();
+        Unit targetUnit = (Unit) selectOutputUnit.getSelectedItem();
+        String resultString;
         try {
-            Unit sourceUnit = (Unit) selectInputUnit.getSelectedItem();
-            Unit targetUnit = (Unit) selectOutputUnit.getSelectedItem();
             BigDecimal amount = new BigDecimal(input.getText());
-
-            BigDecimal result = sourceUnit.convert(amount, targetUnit);
-            String resultString = result.toPlainString();
+            if (sourceUnit instanceof Money) {
+                resultString = ((Money) sourceUnit)
+                        .updateAndConvert(amount, (Money) targetUnit)
+                        .toPlainString();
+            } else {
+                resultString = sourceUnit.convert(amount, targetUnit).toPlainString();
+            }
             getOutput().setText(targetUnit.getFormattedValue(resultString));
             getJpanel().setText(createTableWithAllConversion(amount, sourceUnit));
         } catch (NumberFormatException nfe) {
@@ -156,6 +165,13 @@ public abstract class Screen extends JPanel implements ScreenProperties {
                 getOutput().setText(null);
             }
             getJpanel().setText(null);
+            getInput().grabFocus();
+        } catch (ArithmeticException ae) {
+            getOutput().setText("Arithmetic error!");
+            getJpanel().setText(ae.getMessage());
+        } catch (Exception e) {
+            getOutput().setText(null);
+            getJpanel().setText(e.getMessage());
         }
     }
 

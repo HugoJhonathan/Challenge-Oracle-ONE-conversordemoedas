@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.SocketException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 public class Api {
 
     static String url = "https://economia.awesomeapi.com.br/last/";
+    static Gson gson = new Gson();
+    static Type type = new TypeToken<Map<String, Coin>>() {
+    }.getType();
 
     public static Map<String, Coin> findAllCurrenciesDollarEquivalent(String codes) throws Exception {
 
@@ -29,18 +34,13 @@ public class Api {
 
             BufferedReader response = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
             String stringOfResponseJson = convertJsonToString(response);
-
-            Gson gson = new Gson();
-
-            Type type = new TypeToken<Map<String, Coin>>() {
-            }.getType();
-
             Map<String, Coin> coins = gson.fromJson(stringOfResponseJson, type);
-
             return coins;
 
-        } catch (Exception e) {
-            throw new Exception("Error: " + e);
+        } catch (SocketException e) {
+            throw new SocketException("No internet access!");
+        } catch (UnknownHostException e) {
+            throw new UnknownHostException("Unable to connect to API!");
         }
     }
 

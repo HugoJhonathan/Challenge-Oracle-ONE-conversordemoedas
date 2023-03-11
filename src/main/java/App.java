@@ -7,9 +7,9 @@ import javax.swing.*;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        MoneyService.updateDollarEquivalenceOfCoins();
         FlatDarkLaf.setup();
         SwingUtilities.invokeLater(Window::new);
+        MoneyService.updateDollarEquivalenceOfCoins();
     }
 
 }

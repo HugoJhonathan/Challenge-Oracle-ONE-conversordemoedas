@@ -3,18 +3,17 @@ package service;
 import units.Money;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MoneyService {
 
-    public static void updateDollarEquivalenceOfCoins() throws Exception {
-        String joinedWithUSD = Money.getAllSymbols()
-                .stream()
-                .filter(e -> !Objects.equals(e, "USD"))
-                .map(e -> e + "-USD")
-                .collect(Collectors.joining(","));
+    private static String joinedWithUSD = Money.getAllSymbols()
+            .stream()
+            .filter(e -> !e.equals("USD"))
+            .map(e -> e + "-USD")
+            .collect(Collectors.joining(","));
 
+    public static void updateDollarEquivalenceOfCoins() throws Exception {
         Map<String, Coin> m = Api.findAllCurrenciesDollarEquivalent(joinedWithUSD);
         m.forEach((key, value) -> {
             String code = value.getCode();

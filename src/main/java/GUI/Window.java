@@ -13,6 +13,7 @@ public class Window extends JFrame {
     private JPanel pageContentContainer;
 
     public Window() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         init();
         setVisible(true);
     }
@@ -38,7 +39,6 @@ public class Window extends JFrame {
         setIconImage(Util.getImage("images/icon.png"));
         setResizable(true);
         setSize(600, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         add(getNavBar(), BorderLayout.WEST);
         add(getPageContentContainer(), BorderLayout.CENTER);
