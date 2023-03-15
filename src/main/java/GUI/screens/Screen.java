@@ -94,20 +94,14 @@ public abstract class Screen extends JPanel implements ScreenProperties {
 
     public JComboBox<Unit> getSelectInputUnit() {
         if (Objects.nonNull(selectInputUnit)) return selectInputUnit;
-        selectInputUnit = new JComboBox<>();
-        Arrays.stream(getValues()).forEach(el -> {
-            this.selectInputUnit.addItem(el);
-        });
+        selectInputUnit = new JComboBox<>(getValues());
         selectInputUnit.setRenderer(new DistanceRenderer());
         return selectInputUnit;
     }
 
     public JComboBox<Unit> getSelectOutputUnit() {
         if (Objects.nonNull(selectOutputUnit)) return selectOutputUnit;
-        selectOutputUnit = new JComboBox<>();
-        Arrays.stream(getValues()).forEach(el -> {
-            this.selectOutputUnit.addItem(el);
-        });
+        selectOutputUnit = new JComboBox<>(getValues());
         selectOutputUnit.setSelectedIndex(1);
         selectOutputUnit.setRenderer(new DistanceRenderer());
         return selectOutputUnit;
