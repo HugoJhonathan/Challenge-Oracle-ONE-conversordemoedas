@@ -34,7 +34,9 @@ adicionar a meu programa outro tipo de conversões como temperatura por exemplo?
 ## Resultado
 
 <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/out/artifacts/Conversor_jar/Conversor.jar?raw=true">
-Download JAR<a>
+Download JAR<a> 
+
+_(necessário JRE 8 ou superior)_
 
 https://user-images.githubusercontent.com/40052440/226792500-a882da58-52c5-4f67-ad39-3cbef97aed18.mp4
 
