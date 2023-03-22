@@ -10,7 +10,7 @@
 ### Sprint 01: Crie seu próprio conversor de moeda
 
 <br> 
-  
+
 ## História
 
 Nesta oportunidade foi solicitado para nós Devs a criação de um conversor de moeda utilizando a linguagem Java. As
@@ -36,8 +36,7 @@ adicionar a meu programa outro tipo de conversões como temperatura por exemplo?
 <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/out/artifacts/Conversor_jar/Conversor.jar?raw=true">
 Download JAR<a>
 
-<img src="https://i.imgur.com/J6cdkmj.png">
-
+https://user-images.githubusercontent.com/40052440/226792500-a882da58-52c5-4f67-ad39-3cbef97aed18.mp4
 
 ### Conversão
 
@@ -47,7 +46,7 @@ Download JAR<a>
 - Uma unidade pode ser **convertida para outra** chamando seu próprio método convert, assim:
 
 ```java
-BigDecimal result = REAL.convert(new BigDecimal("1"), DOLAR);
+BigDecimal result=REAL.convert(new BigDecimal("1"),DOLAR);
 ```
 
 ! O fator multiplicador das moedas é o valor equivalente de 1 em relação ao Dolar, para facilitar a conversão entre
@@ -59,7 +58,8 @@ elas.
   onde podemos criar componentes e interfaces gráficas com o paradígma orientado a objetos.
 
 - [x] Fácil expansão e adição de novas unidades de conversão
-- Para adicionar novas unidades, basta criar uma subclasse de <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/units/Unit.java">
+- Para adicionar novas unidades, basta criar uma subclasse
+  de <a href="https://github.com/HugoJhonathan/Challenge-Oracle-ONE-conversordemoedas/blob/main/src/main/java/units/Unit.java">
   Unit</a>.
 - Para adicionar a tela referente a essa nova unidade de conversão basta:
 
